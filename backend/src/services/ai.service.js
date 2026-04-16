@@ -40,12 +40,22 @@ Return ONLY JSON in this format:
     // ✅ FIX HERE
     const text = aiResponse.data.choices[0].message.content;
 
-    try {
-      return JSON.parse(text);
-    } catch {
-      return { explanation: text };
-    }
+// 🔥 REMOVE ```json ```
+const cleanText = text
+  .replace(/```json/g, "")
+  .replace(/```/g, "")
+  .trim();
 
+try {
+  return JSON.parse(cleanText);
+} catch {
+  return {
+    explanation: cleanText,
+    error: "",
+    fix: "",
+    suggestions: "",
+  };
+}
   } catch (error) {
     console.error("AI Error:", error.response?.data || error.message);
     return { error: "AI analysis failed" };
