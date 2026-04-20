@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const History = ({ onSelect }) => {
+const History = ({ setSelectedRequest }) => {
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
@@ -18,12 +18,12 @@ const History = ({ onSelect }) => {
 
       {history.map((item, i) => (
         <div
-          key={i}
-          onClick={() => onSelect(item)}
-          className="p-2 text-xs bg-[#020617] rounded mb-2 cursor-pointer hover:bg-[#1e293b]"
-        >
-          {item.method} - {item.url}
-        </div>
+  key={i}
+  onClick={() => setSelectedRequest(item)}
+  className="cursor-pointer hover:bg-gray-700 p-2 rounded"
+>
+  {item.method} - {item.url}
+</div>
       ))}
       <button
   onClick={() => {
